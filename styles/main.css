@@ -1,0 +1,71 @@
+html {
+    height: 100%; /* makes sure our html takes up 100% of the browser window */
+}
+
+body {
+    font-family: 'Open Sans'; /* sets our font to the Open Sans typeface from Google fonts */
+    color: white; /* sets the text color to white */
+    min-height: 100%; /* says the height of the body must be minimum of 100% of the window */
+}
+
+body.landing {
+    background-color: rgb(58,23,63); /* blackish */
+}
+
+.navbar {
+    padding: 0.5rem; /* 1/2 root em. use root em (relative to root/base) text size for making responsive sizing easier. space inside of nav bar*/
+    background-color: rgb(101,18,95); /* purple */
+}
+
+.navbar .logo { /* descendent selector: "logo" inside "navbar" */
+    position: relative /* */
+    left: 2rem;
+}
+
+.hero-content {
+    position: relative; /**/
+    min-height: 600px;
+    background-image: url(../assets/images/bloc_jams_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center center; /* horizontal and vertical */
+    background-size: cover; /* scales image so background is always covered by image */
+}
+
+.hero-content .hero-title {
+    position: absolute;
+    top: 40%;
+    -webkit-transform: translateY(-50%); /* vendor prefix. vertically center text */
+    -moz-transform: translateY(-50%); /* Mozilla vendor prefix. vertically center text */
+    -ms-transform: translateY(-50%); /* Microsoft vendor prefix. vertically center text */
+    width: 100%; /* text width takes full width of container */
+    text-align: center; /** align horizontal center of element */
+    font-size: 4rem; /* size of font is 4 root ems */
+    font-weight: 300; /* thinner font weight */
+    text-transform: uppercase; /* transforms text to caps */
+    letter-spacing: 0.5rem; /* 0.5 root ems space between letters */
+    text-shadow: 1px 1px 9px rgb(58,23,63); /* shadow underneath text for readability over background image */
+}
+
+.selling-points {
+    position: relative;
+    display: table; /* place elements in table-like layout */
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.point {
+    display: table-cell;
+    position: relative;
+    width: 33.3%;
+    padding: 2rem;
+    text-align: center;
+}
+.point .point-title {
+    font-size: 1.25rem;
+}
+.ion-music-note, .ion-radio-waves, .ion-iphone {
+    color: rgb(233,50,117); /* pink */
+    font-size: 5rem;
+}
