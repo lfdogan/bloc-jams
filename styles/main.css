@@ -78,4 +78,12 @@ Kindle Fire HD 8.9 min-device-width: 1200px
 
 
 
+.clearfix:before,
+.clearfix:after {
+   content: " ";
+   display: table;
+}
 
+.clearfix:after {
+   clear: both;
+}
