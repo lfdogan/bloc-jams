@@ -22,17 +22,18 @@ body {
 
 .navbar { /* the entire top bar section */
     position: relative;
-    padding: 0.5rem; /* 1/2 root em. use root em (relative to root/base) text size for making responsive sizing easier. space inside of nav bar*/
-     background-color: rgba(101,18,95,0.5); /* purple. the "a" takes a 4th argument for transparency (0-1). */
+    padding: 0.5rem; /* 0.5 root em. use root em (relative to root/base) text size for making responsive sizing easier. space inside of nav bar*/
+    background-color: rgba(101,18,95,0.5); /* purple. the "a" takes a 4th argument for transparency (0-1). */
     z-index: 1; /* this element will be on top of others. the higher the number the higher the element sits */
 }
 
 .navbar .logo { /* descendent selector: "logo" inside "navbar" */
-    position: relative /* */
+    position: relative; /* */
     left: 2rem;
     cursor: pointer;/* produces the finger-pointer icon when you hover over the logo */
 }
-.navbar .links-container {
+
+.navbar .links-container {/* descendent selector: "links-container" inside "navbar" */
      display: table;
      position: absolute;
      top: 0; /* all the way to the top */
@@ -42,7 +43,7 @@ body {
      /*text-decoration: none;  no link underline */
  }
 
- .links-container .navbar-link {
+ .links-container .navbar-link {/* descendent selector: "navbar-link" inside "links-container" */
      display: table-cell;
      position: relative;
      height: 100%;
@@ -91,7 +92,7 @@ Kindle Fire HD 8.9 min-device-width: 1200px
 
  /* Medium and small screens (640px) smaller tablets and bigger phones */
  @media (min-width: 40rem) { /* Everything that is at least 40 root ems wide */
-     html { font-size: 112%; };
+     html { font-size: 112%; }
      .column {
          float: left; /* sticks to left-side of container */
          padding-left: 1rem;
