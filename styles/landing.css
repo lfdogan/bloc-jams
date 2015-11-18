@@ -1,0 +1,48 @@
+/* LANDING.CSS is for index.html styles */
+
+body.landing {
+    background-color: rgb(58,23,63); /* blackish */
+}
+
+.hero-content {
+    position: relative; /**/
+    min-height: 600px;
+    background-image: url(../assets/images/bloc_jams_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center center; /* horizontal and vertical */
+    background-size: cover; /* scales image so background is always covered by image */
+}
+
+.hero-content .hero-title {
+    position: absolute;
+    top: 40%;
+    -webkit-transform: translateY(-50%); /* vendor prefix. vertically center text */
+    -moz-transform: translateY(-50%); /* Mozilla vendor prefix. vertically center text */
+    -ms-transform: translateY(-50%); /* Microsoft vendor prefix. vertically center text */
+    width: 100%; /* text width takes full width of container */
+    text-align: center; /** align horizontal center of element */
+    font-size: 4rem; /* size of font is 4 root ems */
+    font-weight: 300; /* thinner font weight */
+    text-transform: uppercase; /* transforms text to caps */
+    letter-spacing: 0.5rem; /* 0.5 root ems space between letters */
+    text-shadow: 1px 1px 9px rgb(58,23,63); /* shadow underneath text for readability over background image */
+}
+/* Remove the width property definition since it's applied with the grid classes. Remove the display properties. The column class's float property takes care of displaying our content in a grid, so we no longer need them formatted like a table. */
+.selling-points {
+    position: relative;
+}
+/* Remove the width property definition since it's applied with the grid classes. Remove the display properties. The column class's float property takes care of displaying our content in a grid, so we no longer need them formatted like a table. */
+.point {
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+}
+
+.point .point-title {
+    font-size: 1.25rem;
+}
+
+.ion-music-note, .ion-radio-waves, .ion-iphone {
+    color: rgb(233,50,117); /* pink */
+    font-size: 5rem;
+}

@@ -1,3 +1,13 @@
+/* MAIN.CSS is for GLOBAL styles */
+
+
+*, *:before, *:after { /*selects ALL elements on page. make sure all the elements in Bloc Jams are sized using border-box. */
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+ }/* We want to keep the 2rem padding that we applied to the point class. However, we don't want the padding to affect the width of the elements, so they will maintain a consistent ratio for both small and large screens. */
+
+
 html {
     height: 100%; /* makes sure our html takes up 100% of the browser window */
 }
@@ -8,9 +18,7 @@ body {
     min-height: 100%; /* says the height of the body must be minimum of 100% of the window */
 }
 
-body.landing {
-    background-color: rgb(58,23,63); /* blackish */
-}
+
 
 .navbar {
     padding: 0.5rem; /* 1/2 root em. use root em (relative to root/base) text size for making responsive sizing easier. space inside of nav bar*/
@@ -22,50 +30,52 @@ body.landing {
     left: 2rem;
 }
 
-.hero-content {
-    position: relative; /**/
-    min-height: 600px;
-    background-image: url(../assets/images/bloc_jams_bg.jpg);
-    background-repeat: no-repeat;
-    background-position: center center; /* horizontal and vertical */
-    background-size: cover; /* scales image so background is always covered by image */
+.container {
+    margin: 0 auto; /* 0 top/bottom and auto left/right will center it */
+    max-width: 64rem; /* maximum width of element is 64 root em. This is noticeable on large screens */
 }
 
-.hero-content .hero-title {
-    position: absolute;
-    top: 40%;
-    -webkit-transform: translateY(-50%); /* vendor prefix. vertically center text */
-    -moz-transform: translateY(-50%); /* Mozilla vendor prefix. vertically center text */
-    -ms-transform: translateY(-50%); /* Microsoft vendor prefix. vertically center text */
-    width: 100%; /* text width takes full width of container */
-    text-align: center; /** align horizontal center of element */
-    font-size: 4rem; /* size of font is 4 root ems */
-    font-weight: 300; /* thinner font weight */
-    text-transform: uppercase; /* transforms text to caps */
-    letter-spacing: 0.5rem; /* 0.5 root ems space between letters */
-    text-shadow: 1px 1px 9px rgb(58,23,63); /* shadow underneath text for readability over background image */
-}
 
-.selling-points {
-    position: relative;
-    display: table; /* place elements in table-like layout */
-    width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+/* MEDIA QUERIES FOR RESPONSIVE BREAKPOINTS */
+/* 
+iPhone4/5 min-device-width: 320px
+Galaxy S3/4 device-width: 320px
+Galaxy S5 device-width: 360px
+HTC One device-width: 360px
+iPhone6 min-device-width: 375px
+iPhone6+ min-device-width: 414px
 
-.point {
-    display: table-cell;
-    position: relative;
-    width: 33.3%;
-    padding: 2rem;
-    text-align: center;
+Asus Nexus 7 device-width: 601px
+iPad mini, iPad1/2/3/4 min-device-width: 768px
+Galaxy Tab 10.1 min-device-width: 800px
+Kindle Fire HD 7 min-device-width: 800px
+Kindle Fire HD 8.9 min-device-width: 1200px
+
+*/
+
+/* ROOT EM = 16PX in most browsers */
+
+ /* Medium and small screens (640px) smaller tablets and bigger phones */
+ @media (min-width: 40rem) { /* Everything that is at least 40 root ems wide */
+     html { font-size: 112%; };
+     .column {
+         float: left; /* sticks to left-side of container */
+         padding-left: 1rem;
+         padding-right: 1rem;
+         }
+     .column.full {width: 100%;}
+     .column.two-thirds {width: 66.7%;}
+     .column.half {width: 50%;}
+     .column.third {width: 33.3%;}
+     .column.fourth {width: 25%;}
+     .column.flow-opposite {float: right;}
 }
-.point .point-title {
-    font-size: 1.25rem;
-}
-.ion-music-note, .ion-radio-waves, .ion-iphone {
-    color: rgb(233,50,117); /* pink */
-    font-size: 5rem;
-}
+ 
+ /* Large screens (1024px) laptops and tablets */
+ @media (min-width: 64rem) {
+     html { font-size: 120%;}
+ }
+
+
+
+
