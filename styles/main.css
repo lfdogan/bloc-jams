@@ -20,15 +20,49 @@ body {
 
 
 
-.navbar {
+.navbar { /* the entire top bar section */
+    position: relative;
     padding: 0.5rem; /* 1/2 root em. use root em (relative to root/base) text size for making responsive sizing easier. space inside of nav bar*/
-    background-color: rgb(101,18,95); /* purple */
+     background-color: rgba(101,18,95,0.5); /* purple. the "a" takes a 4th argument for transparency (0-1). */
+    z-index: 1; /* this element will be on top of others. the higher the number the higher the element sits */
 }
 
 .navbar .logo { /* descendent selector: "logo" inside "navbar" */
     position: relative /* */
     left: 2rem;
+    cursor: pointer;/* produces the finger-pointer icon when you hover over the logo */
 }
+.navbar .links-container {
+     display: table;
+     position: absolute;
+     top: 0; /* all the way to the top */
+     right: 0; /* all the way to the right */
+     height: 100px;
+     color: white; /* text color */
+     /*text-decoration: none;  no link underline */
+ }
+
+ .links-container .navbar-link {
+     display: table-cell;
+     position: relative;
+     height: 100%;
+     padding-left: 1rem;
+     padding-right: 1rem;
+     vertical-align: middle;     /* orients inline or table-cell content vertically to the "middle" */
+     color: white;
+     font-size: 0.625rem;
+     letter-spacing: 0.05rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     text-decoration: none; /*  no link underline */
+     cursor: pointer;
+ }
+
+
+
+ .links-container .navbar-link:hover {   /* pseudo-class selector for mouse hover  */
+     color: rgb(233,50,117); /* text changes color to bright pink */
+ }
 
 .container {
     margin: 0 auto; /* 0 top/bottom and auto left/right will center it */
