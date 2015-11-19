@@ -1,0 +1,71 @@
+body.album { /* add background image that doesn't repeat, is fixed for scrolling, centered on page, and stretches */
+     background-image: url(../assets/images/blurred_backgrounds/blur_bg_3.jpg);
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     background-position: center center;
+     background-size: cover;
+ }
+ 
+ .album-cover-art { /* cover art is much smaller */
+     position: relative;
+     left: 20%;
+     margin-top: 1rem;
+     width: 60%;
+ }
+ 
+ .album-view-details { /* second column is details. */
+     position: relative;
+     top: 1.5rem;
+     padding: 1rem;
+ }
+ 
+ .album-view-details .album-view-title {
+     font-weight: 300;
+     font-size: 2rem;
+ }
+ 
+ .album-view-details .album-view-artist {
+     font-weight: 300;
+     font-size: 1.5rem;
+ }
+ 
+ .album-view-details .album-view-release-info {
+     font-weight: 300;
+     font-size: 0.75rem;
+ }
+.album-view-song-list { /* increases width of table columns */
+     width: 90%;
+     margin: 1.5rem auto;
+     font-weight: 300;
+     font-size: 0.75em;
+ }
+ 
+ .album-view-song-item { /* use border-botoom to draw a line below each track (table row) */
+     height: 3rem;
+     border-bottom: 1px solid rgba(255,255,255,0.5);
+ }
+ 
+ .song-item-number {
+     width: 5%;
+ }
+ 
+ .song-item-title {
+     width: 85%;
+ }
+ 
+ .song-item-duration {
+     width: 5%;
+ }
+
+@media (max-width: 40rem) and (min-width: 20rem) { /* screen sizes 20-40rem: center text detail, title no top margin */
+    .album-view-details {text-align: center}
+    .album-view-title {margin-top: 0}
+}
+@media (max-width: 64rem) and (min-width: 20rem) { /* screen sizes 20-64rem: song lists are 1rem from top, centered, 10% margin on left and right */
+    .album-view-song-list {
+        position: relative;
+        top: 1rem;
+        width: 80%;
+        margin: auto;
+    }
+}

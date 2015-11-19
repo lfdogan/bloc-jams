@@ -69,6 +69,16 @@ body {
     margin: 0 auto; /* 0 top/bottom and auto left/right will center it */
     max-width: 64rem; /* maximum width of element is 64 root em. This is noticeable on large screens */
 }
+ .container.narrow {
+     max-width: 56rem;
+ }
+
+
+
+
+
+
+
 
 
 /* MEDIA QUERIES FOR RESPONSIVE BREAKPOINTS */
