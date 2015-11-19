@@ -64,6 +64,12 @@ body {
  .links-container .navbar-link:hover {   /* pseudo-class selector for mouse hover  */
      color: rgb(233,50,117); /* text changes color to bright pink */
  }
+ .links-container .navbar-link:active {   /* pseudo-class selector for mouse button pressed  */
+     color: rgb(233,50,117); /* text changes color to bright pink */
+     background-color: white;
+ }
+
+
 
 .container {
     margin: 0 auto; /* 0 top/bottom and auto left/right will center it */
