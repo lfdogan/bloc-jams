@@ -36,6 +36,18 @@ body.landing {
     position: relative;
     padding: 2rem;
     text-align: center;
+    opacity: 0; /* on page load this element will not be visible.  */
+    /* The transform property can have many values. We're using scaleX(x) to scale the element to 90% of its width. We're also using translateY(y) to to move the element 3rem down from its normal position. */
+    -webkit-transform: scaleX(0.9) translateY(3rem);
+     -moz-transform: scaleX(0.9) translateY(3rem);
+     transform: scaleX(0.9) translateY(3rem);
+    /* The transition property can have four unique values, of which we're using three: <transition-property> <transition-duration> <transition-timing-function>. The first value specifies the name of the CSS property the effect is for; in this case, we want to transition all CSS properties of the element. We want the transition to last a quarter of a second, and we want the transition timing function to ease-in-out. */
+     -webkit-transition: all 0.25s ease-in-out;
+     -moz-transition: all 0.25s ease-in-out;
+     transition: all 0.25s ease-in-out;
+     -webkit-transition-delay: 0.2s;
+     -moz-transition-delay: 0.2s;
+     transition-delay: 0.2s; /* delay the transition by 0.2 seconds. */
 }
 
 .point .point-title {
