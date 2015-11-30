@@ -57,12 +57,12 @@ body.landing {
      padding: 2rem;
      text-align: center;
      opacity: 0;
-     -webkit-transform: scaleX(0.9) translateY(3rem);
-     -moz-transform: scaleX(0.9) translateY(3rem);
-     transform: scaleX(0.9) translateY(3rem);
-     -webkit-transition: all 3s ease-in-out;
-     -moz-transition: all 3s ease-in-out;
-     transition: all 3s ease-in-out;
+     -webkit-transform: scaleX(0.7) translateY(3rem);
+     -moz-transform: scaleX(0.7) translateY(3rem);
+     transform: scaleX(0.7) translateY(3rem);
+     -webkit-transition: all 0.5s ease-in-out;
+     -moz-transition: all 0.5s ease-in-out;
+     transition: all 0.5s ease-in-out;
      -webkit-transition-delay: 0.2s;
      -moz-transition-delay: 0.2s;
      transition-delay: 0.2s;
@@ -72,15 +72,13 @@ body.landing {
     font-size: 1.25rem;
 }
 
-/* Experiment with the many transition options by adding new transitions or altering the current transitions of the .point class in landing.css */
+/* Experiment with the many transition options by adding new transitions or altering the current transitions of the .point class in landing.css 
 .point:hover {
     background-color: azure;
     color: black;
     border: 2px solid white;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    transition: all 1s;
 }
+*/
 
 .ion-music-note, .ion-radio-waves, .ion-iphone {
     color: rgb(233,50,117); /* pink */
