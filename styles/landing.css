@@ -27,31 +27,59 @@ body.landing {
     letter-spacing: 0.5rem; /* 0.5 root ems space between letters */
     text-shadow: 1px 1px 9px rgb(58,23,63); /* shadow underneath text for readability over background image */
 }
+
 /* Remove the width property definition since it's applied with the grid classes. Remove the display properties. The column class's float property takes care of displaying our content in a grid, so we no longer need them formatted like a table. */
 .selling-points {
     position: relative;
 }
+
 /* Remove the width property definition since it's applied with the grid classes. Remove the display properties. The column class's float property takes care of displaying our content in a grid, so we no longer need them formatted like a table. */
+
+
+/* on page load this element will not be visible.  */
+    /* The transform property can have many values. 
+    We're using scaleX(x) to scale the element to 90% of its width. 
+    We're also using translateY(y) to to move the element 
+    3rem down from its normal position. */
+
+    /* The transition property can have four unique values,
+    of which we're using three: 
+    <transition-property> <transition-duration> <transition-timing-function>. 
+    The first value specifies the name of the CSS property the effect is for; 
+    in this case, we want to transition all CSS properties of the element. 
+    We want the transition to last a quarter of a second, and we want the 
+    transition timing function to ease-in-out. */
+
+    /* delay the transition by 0.2 seconds. */
+
 .point {
-    position: relative;
-    padding: 2rem;
-    text-align: center;
-    opacity: 0; /* on page load this element will not be visible.  */
-    /* The transform property can have many values. We're using scaleX(x) to scale the element to 90% of its width. We're also using translateY(y) to to move the element 3rem down from its normal position. */
-    -webkit-transform: scaleX(0.9) translateY(3rem);
+     position: relative;
+     padding: 2rem;
+     text-align: center;
+     opacity: 0;
+     -webkit-transform: scaleX(0.9) translateY(3rem);
      -moz-transform: scaleX(0.9) translateY(3rem);
      transform: scaleX(0.9) translateY(3rem);
-    /* The transition property can have four unique values, of which we're using three: <transition-property> <transition-duration> <transition-timing-function>. The first value specifies the name of the CSS property the effect is for; in this case, we want to transition all CSS properties of the element. We want the transition to last a quarter of a second, and we want the transition timing function to ease-in-out. */
-     -webkit-transition: all 0.25s ease-in-out;
-     -moz-transition: all 0.25s ease-in-out;
-     transition: all 0.25s ease-in-out;
+     -webkit-transition: all 3s ease-in-out;
+     -moz-transition: all 3s ease-in-out;
+     transition: all 3s ease-in-out;
      -webkit-transition-delay: 0.2s;
      -moz-transition-delay: 0.2s;
-     transition-delay: 0.2s; /* delay the transition by 0.2 seconds. */
-}
+     transition-delay: 0.2s;
+ }
 
 .point .point-title {
     font-size: 1.25rem;
+}
+
+/* Experiment with the many transition options by adding new transitions or altering the current transitions of the .point class in landing.css */
+.point:hover {
+    background-color: azure;
+    color: black;
+    border: 2px solid white;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s;
 }
 
 .ion-music-note, .ion-radio-waves, .ion-iphone {
