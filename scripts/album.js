@@ -14,7 +14,6 @@ var albumPicasso = {
         {name: 'Magenta', length: '2:15'}
     ]
 };
-
 // ALBUM 20
 var albumMarconi = {
     name: 'The Telephone',
@@ -32,17 +31,24 @@ var albumMarconi = {
     ]
 };
 
+
+
+
 // Add html to the "template" to display track#, song title, song time in 3 cells of one table row
 var createSongRow = function(songNumber, songName, songLength){
     var template = 
         '<tr class="album-view-song-item">'
-        +    '<td class="song-item-number">'+songNumber+'</td>' 
+        //+    '<td class="song-item-number">'+songNumber+'</td>' 
+        +    '<td class="song-item-number" data-song-number="'+songNumber+'">'+songNumber+'</td>'
         +    '<td class="song-item-title">'+songName+'</td>' 
         +    '<td class="song-item-duration">'+songLength+'</td>'
        + '</tr>'
     ;
     return template;
 };
+
+
+
 
 
 
@@ -67,6 +73,32 @@ var setCurrentAlbum = function(album){
     }
 };
 
+
+
+
+
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var songRows = document.getElementsByClassName('album-view-song-item'); /*<tr class="album-view-song-item">...</tr>*/
+//album button templates to change from track# to play icon
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
+
+
+
+
 window.onload = function(){
     setCurrentAlbum(albumPicasso);
+    songListContainer.addEventListener('mouseover', function(event) {
+        /*console.log(event.target); /* displays the current element ex: <td class="...">Blue</td> */
+        /* for a particular table row change the innerHTML from showing track# to play icon. We use the querySelector() method because we only need to return a single element with the .song-item-number class. */
+        if (event.target.parentElement.className === 'album-view-song-item'){
+            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+        }
+    });
+    //The DOM uses the mouseleave event to signal when a mouse leaves the target element's bounds. For this event, we want to attach event listeners to each table row (instead of using event delegation) because the action of leaving a cell is not something that can be specified as easily by listening on the parent. We will select an array of every table row and loop over each to add its event listener. Select the first child element (children[0]) which is the track# cell and sett innerHTML to the track#. The getAttribute() method takes a single argument: a string with the name of the attribute whose value we want to retrieve. When the mouse leaves a selected table row, it will change back to the song number using the value obtained from this method.
+    for (i=0; i<songRows.length;i++){
+        songRows[i].addEventListener('mouseleave', function(event){
+            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+        });
+    }
 };
