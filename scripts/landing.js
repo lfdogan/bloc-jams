@@ -1,34 +1,44 @@
-/* will activate CSS transitions. it will update styles from CSS to this script. */
 
-/* creates a Node List of all elements with "point" class */
-/* opacity changes from 0 (CSS) to 1 */
-/* TRANSFORM scales from 90% (CSS) to 100% of width and translate to 3rem (CSS) up to normal position */
-/* runs our script */
 
 var pointsArray = document.getElementsByClassName('point');
 
-var points = document.getElementsByClassName('point');
+
+
+
 //var animatePoints = function(){
 var animatePoints = function(points) {
-var revealPoint = function(i) {
-    points[i].style.opacity = 1;
-    points[i].style.transform = "scaleX(1) translateY(0)";
-    points[i].style.msTransform = "scaleX(1) translateY(0)";
-    points[i].style.WebkitTransform = "scaleX(1) translateY(0)";
-};//end revealPoint loop
+    var revealPoint = function(index) {
+        index.style.opacity = 1;
+        index.style.transform = "scaleX(1) translateY(0)";
+        index.style.msTransform = "scaleX(1) translateY(0)";
+        index.style.WebkitTransform = "scaleX(1) translateY(0)";
+    };//end revealPoint loop
+    
+/* ASSIGNMENT #23 SAYS TO PUT FOR LOOP IN THE UTILITIES.JS FILE IN ORDER TO CREATE MY OWN FOREACH FUNCTION
+    for (var i = 0; i < points.length; i++) {
+        console.log("for loop runs");
+        console.log("array in:");
+        console.log(points);
+        console.log("array [i="+i+"] :");
+        console.log(points[i]);
+        revealPoint(i);
+    };//end for loop
+*/
+    
 
-var hidePoint = function(i) {
-    points[i].style.opacity = 0;
-    points[i].style.transform = "scaleX(1) translateY(0)";
-    points[i].style.msTransform = "scaleX(1) translateY(0)";
-    points[i].style.WebkitTransform = "scaleX(1) translateY(0)";
-};//end hidePoint loop
-
-for (var i = 0; i < points.length; i++) {
-    revealPoint(i);
-};//end for loop
-
+myforeach(points,revealPoint);
+    
 };//end animatePoints loop
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -48,7 +58,7 @@ for (var i = 0; i < points.length; i++) {
                             element. The height of all the landing page content is about 950 pixels, so any window 
                             taller than that needs an immediate animation call. Use the window's innerHeight property 
                             to detect the height of the browser when the page loads */
-     var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
+     var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;//50 or 100 would be better!
                             /* addEventListener(<type of event>,<callback function>,<useCapture is optional>)  */
      window.addEventListener('scroll', function(event) {
          if (document.body.scrollTop >= scrollDistance) {
