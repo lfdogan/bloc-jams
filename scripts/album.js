@@ -1,3 +1,5 @@
+
+
 //We've created two album objects to use in our application. In a real-world scenario, we would pull this information from a database, where we could store hundreds or thousands of albums and their corresponding details.
 // ALBUM 01
 var albumPicasso = {
@@ -15,6 +17,7 @@ var albumPicasso = {
     ]
 };
 
+
 // ALBUM 20
 var albumMarconi = {
     name: 'The Telephone',
@@ -31,6 +34,41 @@ var albumMarconi = {
         {name: 'Last Song', length: '6:15'}
     ]
 };
+
+//MY NEW ALBUM
+var albumHeadFull = {
+    name: 'A Head Full of Dreams',
+    artist: 'Coldplay',
+    label: 'Parlophone',
+    year: '2015',
+    albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/975/MI0003975386.jpg?partner=allrovi.com',
+    songs: [
+        {name: 'A Head Full of Dreams', length: '1:01'},
+        {name: 'Birds', length: '5:01'},
+        {name: 'Hymn for the Weekend', length: '3:21'},
+        {name: 'Everglow', length: '3:14'},
+        {name: 'Adventure of a Lifetime', length: '2:15'},
+        {name: 'Fun', length: '6:15'},
+        {name: 'Kaleidoscope', length: '6:15'},
+        {name: 'Army of One', length: '6:15'},
+        {name: 'Amazing Day', length: '6:15'},
+        {name: 'Colour Spectrum', length: '6:15'},
+        {name: 'Up & Up', length: '6:15'}
+    ]
+};
+
+var allAlbums = [albumPicasso, albumMarconi, albumHeadFull];
+
+
+
+
+
+
+
+
+
+
+
 
 // Add html to the "template" to display track#, song title, song time in 3 cells of one table row
 var createSongRow = function(songNumber, songName, songLength){
@@ -65,8 +103,22 @@ var setCurrentAlbum = function(album){
     for (i =0; i<album.songs.length; i++){
         albumSongList.innerHTML += createSongRow(i+1, album.songs[i].name, album.songs[i].length);
     }
+    
+    
+    
+    
 };
 
 window.onload = function(){
-    setCurrentAlbum(albumPicasso);
+    setCurrentAlbum(allAlbums[0]);
 };
+
+    //Asignment 25: Add an event listener to the album cover. When a user clicks it, the album page content should toggle between the three album objects: albumPicasso, albumMarconi, and your album object.
+var viewAlbum = 0;
+    var toggleAlbums = function(){
+    if (viewAlbum+1 === allAlbums.length ) {
+        viewAlbum=0;}
+    else {viewAlbum++;}
+    setCurrentAlbum(allAlbums[viewAlbum]);
+};
+document.getElementsByClassName('album-cover-art')[0].addEventListener("click",toggleAlbums);
