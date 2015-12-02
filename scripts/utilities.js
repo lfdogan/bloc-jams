@@ -7,7 +7,7 @@
 */
 
 
-function myforeach(arrayIn, somecallbackfunction){
+function myForEach(arrayIn, somecallbackfunction){
     for (var i = 0; i < arrayIn.length; i++){
         somecallbackfunction(arrayIn[i]);
     };

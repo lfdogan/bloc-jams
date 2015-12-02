@@ -26,7 +26,7 @@ var animatePoints = function(points) {
 */
     
 
-myforeach(points,revealPoint);
+myForEach(points,revealPoint);
     
 };//end animatePoints loop
 
