@@ -4,6 +4,7 @@ body.album { /* add background image that doesn't repeat, is fixed for scrolling
      background-attachment: fixed;
      background-position: center center;
      background-size: cover;
+    padding-bottom: 200px; /* add space below the last song so that the 150px controls don't cover it */
  }
  
  .album-cover-art { /* cover art is much smaller */
