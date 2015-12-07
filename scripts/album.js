@@ -44,7 +44,8 @@ var createSongRow = function(songNumber, songName, songLength){
         +    '<td class="song-item-duration">'+songLength+'</td>'
        + '</tr>'
     ;
-    return template;
+    //return template;  //javascript
+    return $(template);
 };
 
 
@@ -54,22 +55,34 @@ var createSongRow = function(songNumber, songName, songLength){
 
 var setCurrentAlbum = function(album){
     //we select all of the album.html HTML elements required to display on the album page: title, artist, release info, image, and song list. We want to populate these elements with information. To do so, we assign the corresponding values of the album objects' properties to the HTML elements.
-    var albumTitle = document.getElementsByClassName('album-view-title')[0]; 
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0]; 
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0]; 
-    var albumImage = document.getElementsByClassName('album-cover-art')[0]; 
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    //var albumTitle = document.getElementsByClassName('album-view-title')[0]; 
+    var $albumTitle = $('.album-view-title');
+    //var albumArtist = document.getElementsByClassName('album-view-artist')[0]; 
+    var $albumArtist = $('.album-view-artist');
+    //var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0]; 
+    var $albumReleaseInfo = $('.album-view-release-info');
+    //var albumImage = document.getElementsByClassName('album-cover-art')[0]; 
+    var $albumImage = $('.album-cover-art');
+    //var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    var $albumSongList = $('.album-view-song-list');
     //the firstChild property identifies the first child node of an element, and nodeValue returns or sets the value (the text we'll see in the browser window) of a node. Alternatively, we could technically use innerHTML to insert plain text (like we did in collection.js), but it's excessive and semantically misleading in this context because we aren't adding any HTML.
     // on the first line: set the value of the 'album-view-title' element to the album's name as listed above (ex: albumPicasso.name is 'The Colors' so we would insert 'The Colors' in between the album.html tags <h2 class="album-view-title"></h2>)
-    albumTitle.firstChild.nodeValue = album.name;
-    albumArtist.firstChild.nodeValue = album.artist;
-    albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
-    albumImage.setAttribute('src', album.albumArtUrl);
+    //albumTitle.firstChild.nodeValue = album.name;
+    $albumTitle.text(album.name);// jQuery's text() method to replace the content of the text nodes, instead of setting firstChild.nodeValue. 
+    //albumArtist.firstChild.nodeValue = album.artist;
+    $albumArtist.text(album.artist);
+    //albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
+    $albumReleaseInfo.text(album.year+' '+album.label);
+    //albumImage.setAttribute('src', album.albumArtUrl);
+    $albumImage.attr('src',album.albumArtUrl);
     // Start albumSongList to empty
-    albumSongList.innerHTML = '';
+    //albumSongList.innerHTML = ''; //javascript
+    $albumSongList.empty();
     // then run a for loop to add a table row for each of the listed songs in the album by running the createSongRow function
     for (i =0; i<album.songs.length; i++){
-        albumSongList.innerHTML += createSongRow(i+1, album.songs[i].name, album.songs[i].length);
+        //albumSongList.innerHTML += createSongRow(i+1, album.songs[i].name, album.songs[i].length); //javascript
+        var $newRow = createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
+         $albumSongList.append($newRow);
     }
 };
 
