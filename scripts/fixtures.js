@@ -1,3 +1,8 @@
+//FIXTURES.JS: A file used for holding static data, often used to supply sample data for an application.
+
+
+
+
 //We've created two album objects to use in our application. In a real-world scenario, we would pull this information from a database, where we could store hundreds or thousands of albums and their corresponding details.
 // ALBUM 01
 var albumPicasso = {
