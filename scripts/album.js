@@ -14,6 +14,8 @@ var currentSongFromAlbum = null; //currently playing song object from the songs 
 
 
 
+
+
 /*updatePlayerBarSong function adds content in album.html: 
          <div class="control-group currently-playing">
              <h2 class="song-name"></h2>
@@ -137,7 +139,6 @@ var changeSong = function(oldTrack, newTrack){
         var $oldSongNumberCell = $('.song-item-number[data-song-number="' + oldTrack + '"]');
         $newSongNumberCell.html(pauseButtonTemplate);//'<a class="album-song-button"><span class="ion-pause"></span></a>';
         $oldSongNumberCell.html(oldTrack);//just a number
-        currentSongFromAlbum = currentAlbum.songs[newTrack - 1];
     }
 };
 
