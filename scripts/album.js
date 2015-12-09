@@ -11,7 +11,8 @@ var currentlyPlayingSongNumber = null; //track# of song currently playing. ex: "
 var currentSongFromAlbum = null; //currently playing song object from the songs array. ex: {name: "Red", length: "5:01"}
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
-
+var currentSoundFile = null; // sound object
+var currentVolume = 80; //1-100
 
 
 
@@ -20,11 +21,21 @@ var $nextButton = $('.main-controls .next');
 var setSong = function(songNumber){
     currentlyPlayingSongNumber = Number(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber-1];
+    //assign a new Buzz sound object that passes audioUrl and settings object
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+         formats: [ 'mp3' ], //array of strings with acceptable audio formats
+         preload: true       //we want the music files loaded as soon as the page loads
+     });
+    setVolume(currentVolume);// WHY IS THIS HERE? IT ISN'T GIVEN A NEW VOLUME VALUE AND WE DON'T NEED TO RECREATE BUZZ'S SET.VOLUME METHOD ANYWAY
 };
 var getSongNumberCell= function(number){
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
-
+ var setVolume = function(volume) {// WHY IS THIS HERE? IT ISN'T GIVEN A NEW VOLUME VALUE AND WE DON'T NEED TO RECREATE BUZZ'S SET.VOLUME METHOD ANYWAY
+     if (currentSoundFile) {
+         currentSoundFile.setVolume(volume);// buzz method is sound.setVolume( volume ) with a range of 0-100
+     }
+ };
 
 
 
@@ -57,23 +68,39 @@ var createSongRow = function(songNumber, songName, songLength){
     var $row = $(template);
     var clickHandler = function() {
         //var songNumber = $(this).attr('data-song-number');
-        var songNumber = parseInt($(this).attr('data-song-number')); //Use the parseInt() function to convert all song number references to integers. Wrap every variable assignment involving a song number in a parseInt() call.
+        var songNumber = parseInt($(this).attr('data-song-number')); //Use the parseInt() function to convert 
+                                                                    //all song number references to integers. Wrap 
+                                                                    //every variable assignment involving a song 
+                                                                    //number in a parseInt() call.
         if (currentlyPlayingSongNumber !== null) {// a song is playing
             // Revert to song number for currently playing song because user started playing new song.
             var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
-        if (currentlyPlayingSongNumber !== songNumber) { //a different song is playing
+        if (currentlyPlayingSongNumber !== songNumber) { //click a different song than is playing
             // Switch from Play -> Pause button to indicate new song is playing.
+            if (currentSoundFile !== null) {currentSoundFile.stop();}; //stop playing current sound file
             $(this).html(pauseButtonTemplate);
-            setSong(songNumber); //ex: Object {name: "Green", length: "3:14"}. it comes from album object (currentAlbum)'s songs array. songNumber is the attribute ('data-song-number') on the <tr>
+            setSong(songNumber); //ex: Object {name: "Green", length: "3:14"}. it comes from album 
+                                    //object (currentAlbum)'s songs array. songNumber is the attribute
+                                    //('data-song-number') on the <tr>
+            currentSoundFile.play();
             updatePlayerBarSong();
-        } else if (currentlyPlayingSongNumber === songNumber) {
+        } else if (currentlyPlayingSongNumber === songNumber) { //click pause button on currently playing song
             // Switch from Pause -> Play button to pause currently playing song.
             $(this).html(playButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPlayButton); //song stopped so display a play button
-            currentlyPlayingSongNumber = null; //no track# in play
-            currentSongFromAlbum = null; //no album object in play
+            if ( currentSoundFile.isPaused() ) {//song is paused so begin play
+                currentSoundFile.play();//could also use togglePlay();
+                //$(this).html(pauseButtonTemplate);
+                //$('.main-controls .play-pause').html(playerBarPauseButton);
+            } else {//song is not paused, so pause song
+                currentSoundFile.pause();
+                //$(this).html(playButtonTemplate);
+                //$('.main-controls .play-pause').html(playerBarPlayButton);
+            }
+            //currentlyPlayingSongNumber = null; //no track# in play
+            //currentSongFromAlbum = null; //no album object in play
         }
     };
 
@@ -85,7 +112,7 @@ var createSongRow = function(songNumber, songName, songLength){
         }
     };
     var offHover = function(event) {
-        console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber); // type is OBJECT
+        //console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber); // type is OBJECT
         var songNumberCell = $(this).find('.song-item-number');
         var songNumber = parseInt(songNumberCell.attr('data-song-number'));
         if (songNumber !== currentlyPlayingSongNumber) {
@@ -149,7 +176,7 @@ var trackIndex = function(album, song){
     return album.songs.indexOf(song);
 };
 var nextSong = function() {
-    
+    currentSoundFile.stop();
     var getLastSongNumber = function(index) {//IF CURRENT TRACK# IS 0 RETURN #SONGS ELSE RETURN TRACK#
         return index == 0 ? currentAlbum.songs.length : index;
         //above is shorthand for.... if(index == 0) {return currentAlbum.songs.length } else {return index}
@@ -189,9 +216,12 @@ var nextSong = function() {
     $nextSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
     
+    setSong(currentlyPlayingSongNumber);
+    currentSoundFile.play();
+    
 };
 var previousSong = function() {
-    
+    currentSoundFile.stop();
     // Note the difference between this implementation and the one in
     // nextSong()
     var getLastSongNumber = function(index) {
@@ -223,6 +253,8 @@ var previousSong = function() {
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
     
+    setSong(currentlyPlayingSongNumber);
+    currentSoundFile.play();
 };
 
 
