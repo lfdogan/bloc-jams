@@ -16,6 +16,23 @@ var currentVolume = 80; //1-100
 
 
 
+//convert total number of seconds to H:MM:SS or M:SS
+var convertTime = function (totalSecondsString){
+    totalSeconds = Number(totalSecondsString);
+    hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    minutes = Math.floor(totalSeconds / 60);
+    seconds = totalSeconds % 60;
+    if (seconds < 10) {seconds = "0"+seconds;}
+    if (hours > 0){
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (hours   < 10) {hours   = "0"+hours;}
+        return hours+":"+minutes+":"+Math.round(seconds);
+    } else 
+    return minutes+":"+Math.round(seconds); //displays: 161.71= 2:41.7100000000001
+};
+
+
 
 //assignment32: Create a setSong function that takes one argument, songNumber, and assigns currentlyPlayingSongNumber and currentSongFromAlbum a new value based on the new song number. 
 var setSong = function(songNumber){
@@ -49,21 +66,93 @@ var updatePlayerBarSong = function(){
     $('.song-name').text(currentSongFromAlbum.name);
     $('.artist-song-mobile').text(currentSongFromAlbum.name+' - '+currentAlbum.artist);
     $('.artist-name').text(currentAlbum.artist);
-    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
+    $('.currently-playing .total-time').text(convertTime(currentSongFromAlbum.length));
     $('.main-controls .play-pause').html(playerBarPauseButton); //song is playing so display pause button
 };
 
 
 
 
-// Add html to the "template" to display track#, song title, song time in 3 cells of one table row
+
+
+
+
+
+
+
+//generic method to update any seek bar
+// takes two arguments: 1) which seek bar to alter 2) ratio to determine the width and left values of .fill (current song status or current volume level) and .thumb (small circle) classes
+// convert ratio argument into percentage in order to set CSS property value
+// pass percentage into jquery functions
+ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+    var offsetXPercent = seekBarFillRatio * 100;
+    offsetXPercent = Math.max(0, offsetXPercent); //built-in JavaScript Math.max() function makes 
+                                                    // sure our % isn't less than zero
+    offsetXPercent = Math.min(100, offsetXPercent); //Math.min() function make sures % doesn't exceed 100.
+ 
+    var percentageString = offsetXPercent + '%'; //convert % to string
+    $seekBar.find('.fill').width(percentageString); //set current bar width
+    $seekBar.find('.thumb').css({left: percentageString}); //set circle location from left of bar
+ };
+
+
+
+
+
+
+
+ var setupSeekBars = function() {
+     var $seekBars = $('.player-bar .seek-bar'); //both status bars
+     $seekBars.click(function(event) {
+         // pageX is a jQuery-specific event value, which holds the X (or horizontal) coordinate at which the event occurred (think of the X-Y coordinate plane from Algebra class). PageX gives us the location from the left side of the page (event.pageX) so we need to subtract the distance from the left side of the page to the left side of the status bar ($(this).offset().left;) to get the relative distance from the start of the status bar
+         var offsetX = event.pageX - $(this).offset().left;
+         var barWidth = $(this).width(); //width of full status bar
+         var seekBarFillRatio = offsetX / barWidth; // current location divided by total bar width 
+                                                    //  gives the ratio between 0 ad 1. ex: 0.45 is 45%
+         updateSeekPercentage($(this), seekBarFillRatio); //run function. send current status bar clicked with decimal ratio
+     });
+     
+     $seekBars.find('.thumb').mousedown(function(event) {// when user clicks down the mouse button on the circle
+         var $seekBar = $(this).parent();   //$(this)=<div class="thumb">=circle, parent of circle is <div class="seek-bar"> 
+         // #8
+         $(document).bind('mousemove.thumb', function(event){// bind() takes a string of an event (mouse drag of the circle). Adding $(document) allows us to drag mouse above/below the status bar while continuing to move circle
+             var offsetX = event.pageX - $seekBar.offset().left;
+             var barWidth = $seekBar.width(); // c
+             var seekBarFillRatio = offsetX / barWidth;
+
+             updateSeekPercentage($seekBar, seekBarFillRatio);
+         });
+
+         // #9
+         $(document).bind('mouseup.thumb', function() {
+             $(document).unbind('mousemove.thumb');
+             $(document).unbind('mouseup.thumb');
+         });
+     });
+ };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add html to the "template" to display track#, song title, song time (in total number of seconds) in 3 cells of one table row
 var createSongRow = function(songNumber, songName, songLength){
+    var displaySongLength = convertTime(songLength);
     var template = 
         '<tr class="album-view-song-item">'
         //+    '<td class="song-item-number">'+songNumber+'</td>' 
         +    '<td class="song-item-number" data-song-number="'+songNumber+'">'+songNumber+'</td>'
         +    '<td class="song-item-title">'+songName+'</td>' 
-        +    '<td class="song-item-duration">'+songLength+'</td>'
+        +    '<td class="song-item-duration">'+displaySongLength+'</td>'
        + '</tr>'
     ;
     var $row = $(template);
@@ -206,7 +295,7 @@ var nextSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.name);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
+    $('.currently-playing .total-time').text(convertTime(currentSongFromAlbum.length));
     
     
     //STEP 5: RUN getLastSongNumber FUNCTION PASSING IN CURRENT TRACK# AS INDEX RETURNING ACTUAL TRACK#
@@ -247,7 +336,7 @@ var previousSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.name);
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
+    $('.currently-playing .total-time').text(convertTime(currentSongFromAlbum.length))
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
@@ -271,8 +360,7 @@ var previousSong = function() {
 
 $(document).ready(function(){
     setCurrentAlbum(albumPicasso);//paramaeter is album object
-     $previousButton.click(previousSong);
-     $nextButton.click(nextSong);
-
-    
+    setupSeekBars();
+    $previousButton.click(previousSong);
+    $nextButton.click(nextSong);    
 });
