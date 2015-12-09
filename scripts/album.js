@@ -92,12 +92,12 @@ var createSongRow = function(songNumber, songName, songLength){
             $('.main-controls .play-pause').html(playerBarPlayButton); //song stopped so display a play button
             if ( currentSoundFile.isPaused() ) {//song is paused so begin play
                 currentSoundFile.play();//could also use togglePlay();
-                //$(this).html(pauseButtonTemplate);
-                //$('.main-controls .play-pause').html(playerBarPauseButton);
+                $(this).html(pauseButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPauseButton);
             } else {//song is not paused, so pause song
                 currentSoundFile.pause();
-                //$(this).html(playButtonTemplate);
-                //$('.main-controls .play-pause').html(playerBarPlayButton);
+                $(this).html(playButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPlayButton);
             }
             //currentlyPlayingSongNumber = null; //no track# in play
             //currentSongFromAlbum = null; //no album object in play
