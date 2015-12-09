@@ -9,8 +9,6 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
 var currentAlbum = null; //holds the album object
 var currentlyPlayingSongNumber = null; //track# of song currently playing. ex: "3"
 var currentSongFromAlbum = null; //currently playing song object from the songs array. ex: {name: "Red", length: "5:01"}
-var $previousButton = $('.main-controls .previous');
-var $nextButton = $('.main-controls .next');
 var currentSoundFile = null; // sound object
 var currentVolume = 80; //1-100
 
@@ -306,15 +304,17 @@ var previousSong = function() {
 
 
 
-$('.control-group .play-pause').click(togglePlay);
-
-
+//these variables are only used ONCE! look just below
+var $previousButton = $('.main-controls .previous');
+var $nextButton = $('.main-controls .next');
+var $playerPlayPauseButton = $('.main-controls .play-pause');
 
 
 $(document).ready(function(){
     setCurrentAlbum(albumPicasso);//paramaeter is album object
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     $playerPlayPauseButton.click(togglePlay);
 
     
 });
