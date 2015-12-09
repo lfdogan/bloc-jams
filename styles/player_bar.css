@@ -108,7 +108,7 @@
  }
  .seek-bar .fill {/*fill progress bar to show current position in song */
      background: white; /* color of current progress bar should match the ".thumb" circle*/
-     width: 36%; /* length of current status bar */
+     width: 0%; /* length of initial status bar */
      height: 0.25rem; /* height of rectangle status bar */
      border-radius: 2px; /* NO NOTICEABLE CHANGE! */
  }
@@ -117,16 +117,33 @@
      height: 0.5rem; /*circle height*/
      width: 0.5rem; /*circle width */
      background: white;  /*white circle to match the current progress bar ".fill" color*/
-     left: 36%; /* current location of circle should match the end of the current status bar */
+     left: 0%; /* initial location of circle should match the end of the current status bar */
      top: 50%; /*vertical location of circle*/
          /* #1 */
      margin-left: -0.25rem;
      margin-top: -0.25rem;
      border-radius: 50%;/*rounded corners*/
      cursor: pointer; /*not necessary since it is written on the parent element! */
+    /* the thumb delays when it seeks. This style animates all properties of the 
+        thumb for 100ms. To fix this, we'll limit transitions to the properties 
+        which the :hover selector manipulates. This removes the transition on the 
+        left property that caused the unwanted animation.
      -webkit-transition: all 100ms ease-in-out;
         -moz-transition: all 100ms ease-in-out;
              transition: all 100ms ease-in-out;
+*/
+     -webkit-transition: width 100ms ease-in-out,
+                 height 100ms ease-in-out,
+                 margin-top 100ms ease-in-out,
+                 margin-left 100ms ease-in-out;
+        -moz-transition: width 100ms ease-in-out,
+                 height 100ms ease-in-out,
+                 margin-top 100ms ease-in-out,
+                 margin-left 100ms ease-in-out;
+             transition: width 100ms ease-in-out,
+                 height 100ms ease-in-out,
+                 margin-top 100ms ease-in-out,
+                 margin-left 100ms ease-in-out;
 }
  .seek-bar:hover .thumb {/* circle size increases on hover over total time bar not just circle*/
      width: 1.1rem; /* how wide to display to the right of original location*/
