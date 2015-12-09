@@ -17,6 +17,12 @@ var currentVolume = 80; //1-100
 
 
 
+
+
+
+
+
+
 //assignment32: Create a setSong function that takes one argument, songNumber, and assigns currentlyPlayingSongNumber and currentSongFromAlbum a new value based on the new song number. 
 var setSong = function(songNumber){
     currentlyPlayingSongNumber = Number(songNumber);
@@ -36,6 +42,51 @@ var getSongNumberCell= function(number){
          currentSoundFile.setVolume(volume);// buzz method is sound.setVolume( volume ) with a range of 0-100
      }
  };
+
+
+
+
+
+
+
+
+
+
+
+var togglePlay = function(){
+    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum); // track#3 is index 2
+    var songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+            if ( currentSoundFile.isPaused() ) {//song is paused so begin play
+                currentSoundFile.play();//could also use togglePlay();
+                songNumberCell.html(pauseButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPauseButton);
+            } else {//song is not paused, so pause song
+                currentSoundFile.pause();
+                songNumberCell.html(playButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPlayButton);
+            };
+};
+
+/*
+    var getLastSongNumber = function(index) {//IF CURRENT TRACK# IS 0 RETURN #SONGS ELSE RETURN TRACK#
+        return index == 0 ? currentAlbum.songs.length : index;
+        //above is shorthand for.... if(index == 0) {return currentAlbum.songs.length } else {return index}
+    };
+
+    var lastSongNumber = getLastSongNumber(currentSongIndex);
+    var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
+    
+    $nextSongNumberCell.html(pauseButtonTemplate);
+    $lastSongNumberCell.html(lastSongNumber);
+    
+*/
+
+
+
+
+
+
 
 
 
@@ -90,15 +141,7 @@ var createSongRow = function(songNumber, songName, songLength){
             // Switch from Pause -> Play button to pause currently playing song.
             $(this).html(playButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPlayButton); //song stopped so display a play button
-            if ( currentSoundFile.isPaused() ) {//song is paused so begin play
-                currentSoundFile.play();//could also use togglePlay();
-                //$(this).html(pauseButtonTemplate);
-                //$('.main-controls .play-pause').html(playerBarPauseButton);
-            } else {//song is not paused, so pause song
-                currentSoundFile.pause();
-                //$(this).html(playButtonTemplate);
-                //$('.main-controls .play-pause').html(playerBarPlayButton);
-            }
+            togglePlay();
             //currentlyPlayingSongNumber = null; //no track# in play
             //currentSongFromAlbum = null; //no album object in play
         }
@@ -262,6 +305,8 @@ var previousSong = function() {
 
 
 
+
+$('.control-group .play-pause').click(togglePlay);
 
 
 
