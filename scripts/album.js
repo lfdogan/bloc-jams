@@ -49,6 +49,7 @@ var updatePlayerBarSong = function(){
     $('.song-name').text(currentSongFromAlbum.name);
     $('.artist-song-mobile').text(currentSongFromAlbum.name+' - '+currentAlbum.artist);
     $('.artist-name').text(currentAlbum.artist);
+    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
     $('.main-controls .play-pause').html(playerBarPauseButton); //song is playing so display pause button
 };
 
@@ -205,6 +206,7 @@ var nextSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.name);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
     
     
     //STEP 5: RUN getLastSongNumber FUNCTION PASSING IN CURRENT TRACK# AS INDEX RETURNING ACTUAL TRACK#
@@ -245,6 +247,7 @@ var previousSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.name + " - " + currentAlbum.name);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    $('.currently-playing .total-time').text(currentSongFromAlbum.length);
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
