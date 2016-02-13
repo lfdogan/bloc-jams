@@ -38,3 +38,4 @@ var albumMarconi = {
 };
 
 
+var fixtures = [albumPicasso, albumMarconi];
